@@ -1,1 +1,19 @@
-
+server:
+  port: 21000
+spring:
+  rabbitmq:
+    host: 8.134.177.106
+    port: 5672
+    username: guest
+    password: guest
+    virtual-host: /
+    listener:
+      simple:
+        # 开启手动ack
+        acknowledge-mode: manual
+        # 每次获取10条消息进行消费
+        prefetch: 10
+    # 开启Confirm机制
+    publisher-confirm-type: correlated
+    # 开启Return机制
+    publisher-returns: true
