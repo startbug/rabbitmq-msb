@@ -36,7 +36,9 @@ public class DeadLetterConfig {
     public Queue normalQueue() {
         return QueueBuilder.durable(NORMAL_QUEUE)
                 .deadLetterExchange(DEAD_EXCHANGE)
-                .deadLetterRoutingKey(DEAD_ROUTING_KEY)
+                .deadLetterRoutingKey("dead.sxxxxx")
+//                .ttl(10000)
+                .maxLength(1)
                 .build();
     }
 
@@ -55,9 +57,9 @@ public class DeadLetterConfig {
         return QueueBuilder.durable(DEAD_QUEUE).build();
     }
 
-    @Bean
-    public Binding deadBinding(TopicExchange deadExchange, Queue deadQueue) {
-        return BindingBuilder.bind(deadQueue).to(deadExchange).with(DEAD_ROUTING_KEY);
-    }
+//    @Bean
+//    public Binding deadBinding(TopicExchange deadExchange, Queue deadQueue) {
+//        return BindingBuilder.bind(deadQueue).to(deadExchange).with(DEAD_ROUTING_KEY);
+//    }
 
 }
